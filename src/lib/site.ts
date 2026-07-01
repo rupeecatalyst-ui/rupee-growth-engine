@@ -1,4 +1,3 @@
-import logoAsset from "@/assets/logo.asset.json";
 import homeLoanImg from "@/assets/products/home-loan.jpg";
 import homeLoanBtImg from "@/assets/products/home-loan-bt.jpg";
 import lapImg from "@/assets/products/lap.jpg";
@@ -10,7 +9,7 @@ import mutualFundsImg from "@/assets/products/mutual-funds.jpg";
 export const SITE = {
   name: "Rupee Catalyst",
   tagline: "Funding Growth. Building Wealth.",
-  logoUrl: logoAsset.url,
+  logoUrl: "/Logo.jpeg",
   contactName: "Ketan Kapoor",
   phone: "+91 98219 84181",
   email: "champion@rupeecatalyst.com",
