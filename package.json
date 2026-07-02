@@ -9,7 +9,10 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "db:types": "supabase gen types typescript --linked --schema public > src/integrations/supabase/types.ts",
+    "db:types:local": "supabase gen types typescript --local --schema public > src/integrations/supabase/types.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

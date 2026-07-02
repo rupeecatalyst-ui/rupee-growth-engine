@@ -30,3 +30,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment (never commit secrets; use .env.example as the template)
+.env
+.env.*
+!.env.example
+
+# Build / distribution artifacts that must never be committed
+*.zip
+rupee-growth-engine.zip/
+package-lock/

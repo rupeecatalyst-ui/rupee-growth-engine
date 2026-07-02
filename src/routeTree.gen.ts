@@ -21,7 +21,9 @@ import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoansIndexRouteImport } from './routes/loans.index'
+import { Route as CrmIndexRouteImport } from './routes/crm/index'
 import { Route as LoansSlugRouteImport } from './routes/loans.$slug'
+import { Route as CrmLoansRouteImport } from './routes/crm/loans'
 import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 
 const TermsRoute = TermsRouteImport.update({
@@ -84,9 +86,19 @@ const LoansIndexRoute = LoansIndexRouteImport.update({
   path: '/loans/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmIndexRoute = CrmIndexRouteImport.update({
+  id: '/crm/',
+  path: '/crm/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoansSlugRoute = LoansSlugRouteImport.update({
   id: '/loans/$slug',
   path: '/loans/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmLoansRoute = CrmLoansRouteImport.update({
+  id: '/crm/loans',
+  path: '/crm/loans',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogsSlugRoute = BlogsSlugRouteImport.update({
@@ -108,7 +120,9 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/blogs/$slug': typeof BlogsSlugRoute
+  '/crm/loans': typeof CrmLoansRoute
   '/loans/$slug': typeof LoansSlugRoute
+  '/crm/': typeof CrmIndexRoute
   '/loans/': typeof LoansIndexRoute
 }
 export interface FileRoutesByTo {
@@ -124,7 +138,9 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/blogs/$slug': typeof BlogsSlugRoute
+  '/crm/loans': typeof CrmLoansRoute
   '/loans/$slug': typeof LoansSlugRoute
+  '/crm': typeof CrmIndexRoute
   '/loans': typeof LoansIndexRoute
 }
 export interface FileRoutesById {
@@ -141,7 +157,9 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/blogs/$slug': typeof BlogsSlugRoute
+  '/crm/loans': typeof CrmLoansRoute
   '/loans/$slug': typeof LoansSlugRoute
+  '/crm/': typeof CrmIndexRoute
   '/loans/': typeof LoansIndexRoute
 }
 export interface FileRouteTypes {
@@ -159,7 +177,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/blogs/$slug'
+    | '/crm/loans'
     | '/loans/$slug'
+    | '/crm/'
     | '/loans/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -175,7 +195,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/blogs/$slug'
+    | '/crm/loans'
     | '/loans/$slug'
+    | '/crm'
     | '/loans'
   id:
     | '__root__'
@@ -191,7 +213,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/blogs/$slug'
+    | '/crm/loans'
     | '/loans/$slug'
+    | '/crm/'
     | '/loans/'
   fileRoutesById: FileRoutesById
 }
@@ -207,7 +231,9 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  CrmLoansRoute: typeof CrmLoansRoute
   LoansSlugRoute: typeof LoansSlugRoute
+  CrmIndexRoute: typeof CrmIndexRoute
   LoansIndexRoute: typeof LoansIndexRoute
 }
 
@@ -297,11 +323,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoansIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/crm/': {
+      id: '/crm/'
+      path: '/crm'
+      fullPath: '/crm/'
+      preLoaderRoute: typeof CrmIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/loans/$slug': {
       id: '/loans/$slug'
       path: '/loans/$slug'
       fullPath: '/loans/$slug'
       preLoaderRoute: typeof LoansSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm/loans': {
+      id: '/crm/loans'
+      path: '/crm/loans'
+      fullPath: '/crm/loans'
+      preLoaderRoute: typeof CrmLoansRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blogs/$slug': {
@@ -336,7 +376,9 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  CrmLoansRoute: CrmLoansRoute,
   LoansSlugRoute: LoansSlugRoute,
+  CrmIndexRoute: CrmIndexRoute,
   LoansIndexRoute: LoansIndexRoute,
 }
 export const routeTree = rootRouteImport

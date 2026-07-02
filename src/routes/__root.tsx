@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -99,11 +100,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0f1f3d" },
       { property: "og:title", content: "Rupee Catalyst — Loans & Mutual Fund Investments" },
       { name: "twitter:title", content: "Rupee Catalyst — Loans & Mutual Fund Investments" },
-      { name: "description", content: "A premium FinTech platform for loans and mutual fund investments, driving lead generation and financial education." },
-      { property: "og:description", content: "A premium FinTech platform for loans and mutual fund investments, driving lead generation and financial education." },
-      { name: "twitter:description", content: "A premium FinTech platform for loans and mutual fund investments, driving lead generation and financial education." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d58fc9e1-4688-4cc5-98e0-8292493c9b7a/id-preview-d01b2e90--22fefb94-99bc-4b73-945c-1e72d1b37e52.lovable.app-1782726262061.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d58fc9e1-4688-4cc5-98e0-8292493c9b7a/id-preview-d01b2e90--22fefb94-99bc-4b73-945c-1e72d1b37e52.lovable.app-1782726262061.png" },
+      {
+        name: "description",
+        content:
+          "A premium FinTech platform for loans and mutual fund investments, driving lead generation and financial education.",
+      },
+      {
+        property: "og:description",
+        content:
+          "A premium FinTech platform for loans and mutual fund investments, driving lead generation and financial education.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "A premium FinTech platform for loans and mutual fund investments, driving lead generation and financial education.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d58fc9e1-4688-4cc5-98e0-8292493c9b7a/id-preview-d01b2e90--22fefb94-99bc-4b73-945c-1e72d1b37e52.lovable.app-1782726262061.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d58fc9e1-4688-4cc5-98e0-8292493c9b7a/id-preview-d01b2e90--22fefb94-99bc-4b73-945c-1e72d1b37e52.lovable.app-1782726262061.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -154,17 +175,26 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({
+    select: (s) => s.location.pathname,
+  });
+
+  const isCRM = pathname.startsWith("/crm");
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col bg-background">
-        <SiteHeader />
-        <main className="flex-1 pb-24 lg:pb-0">
+        {!isCRM && <SiteHeader />}
+
+        <main className={isCRM ? "flex-1" : "flex-1 pb-24 lg:pb-0"}>
           <Outlet />
         </main>
-        <SiteFooter />
-        <FloatingActions />
-        <MobileBottomNav />
+
+        {!isCRM && <SiteFooter />}
+
+        {!isCRM && <FloatingActions />}
+
+        {!isCRM && <MobileBottomNav />}
         <Toaster richColors position="top-center" />
       </div>
     </QueryClientProvider>

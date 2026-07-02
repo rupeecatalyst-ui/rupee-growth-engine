@@ -1,0 +1,22 @@
+# Enforce LF line endings for all text files so the repo is consistent across
+# Windows/macOS/Linux and matches Prettier's `endOfLine: "lf"`. Without this,
+# core.autocrlf=true rewrites the working tree to CRLF on Windows and every line
+# trips prettier/prettier ("Delete ␍").
+* text=auto eol=lf
+
+# Generated / lockfiles: keep as-is, don't diff noisily.
+bun.lock -diff
+package-lock.json -diff
+src/routeTree.gen.ts linguist-generated=true
+
+# Binary assets (never normalize).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+*.zip binary

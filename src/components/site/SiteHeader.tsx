@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/loans", label: "Loans" },
-  { to: "/mutual-funds", label: "Mutual Funds" },
   { to: "/calculators", label: "Calculators" },
   { to: "/blogs", label: "Blogs" },
   { to: "/about", label: "About" },
@@ -37,7 +36,9 @@ export function SiteHeader() {
             <img src={SITE.logoUrl} alt={SITE.name} className="h-10 w-auto md:h-12" />
             <span className="hidden sm:flex flex-col leading-tight">
               <span className="font-display text-lg font-extrabold text-navy">Rupee Catalyst</span>
-              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Loans · Investments</span>
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                Loans · Investments
+              </span>
             </span>
           </Link>
 
@@ -60,7 +61,6 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            
             <Button asChild variant="cta" size="default" className="hidden sm:inline-flex">
               <Link to="/apply">Apply Now</Link>
             </Button>
@@ -72,16 +72,24 @@ export function SiteHeader() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[88vw] max-w-[360px] p-0 flex flex-col">
                 <div className="flex items-center gap-2.5 border-b bg-gradient-to-br from-navy to-royal p-5 text-navy-foreground">
-                  <img src={SITE.logoUrl} alt="" aria-hidden="true" className="h-10 w-auto rounded bg-white/10 p-1" />
+                  <img
+                    src={SITE.logoUrl}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-10 w-auto rounded bg-white/10 p-1"
+                  />
                   <div className="flex flex-col leading-tight">
                     <span className="font-display text-base font-extrabold">Rupee Catalyst</span>
-                    <span className="text-[10px] uppercase tracking-wider text-navy-foreground/70">{SITE.tagline}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-navy-foreground/70">
+                      {SITE.tagline}
+                    </span>
                   </div>
                 </div>
                 <div className="flex-1 overflow-y-auto p-4">
                   <nav className="flex flex-col gap-1" aria-label="Primary">
                     {NAV.map((n) => {
-                      const active = pathname === n.to || (n.to !== "/" && pathname.startsWith(n.to));
+                      const active =
+                        pathname === n.to || (n.to !== "/" && pathname.startsWith(n.to));
                       return (
                         <Link
                           key={n.to}
@@ -119,7 +127,13 @@ export function SiteHeader() {
                   </div>
                 </div>
                 <div className="border-t bg-surface p-4">
-                  <Button asChild variant="cta" size="lg" className="w-full" onClick={() => setOpen(false)}>
+                  <Button
+                    asChild
+                    variant="cta"
+                    size="lg"
+                    className="w-full"
+                    onClick={() => setOpen(false)}
+                  >
                     <Link to="/apply">Apply Now</Link>
                   </Button>
                   <a
