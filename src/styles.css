@@ -91,10 +91,57 @@
   --shadow-cta: 0 8px 24px -6px oklch(0.72 0.18 50 / 0.45);
 }
 
+/* RCLIP Enterprise Design System — Dark Mode (slate, not pure black; Bloomberg discipline). */
+.dark {
+  --background: oklch(0.17 0.012 264);
+  --foreground: oklch(0.96 0.004 250);
+  --surface: oklch(0.21 0.014 264);
+
+  --card: oklch(0.21 0.014 264);
+  --card-foreground: oklch(0.96 0.004 250);
+  --popover: oklch(0.24 0.015 264);
+  --popover-foreground: oklch(0.96 0.004 250);
+
+  --navy: oklch(0.30 0.05 264);
+  --navy-foreground: oklch(0.97 0.004 250);
+  --royal: oklch(0.62 0.15 264);
+  --royal-foreground: oklch(0.99 0.003 248);
+  --emerald: oklch(0.62 0.13 162);
+  --emerald-foreground: oklch(0.16 0.02 264);
+  --cta: oklch(0.72 0.17 50);
+  --cta-foreground: oklch(0.16 0.02 264);
+
+  --primary: oklch(0.62 0.15 264);
+  --primary-foreground: oklch(0.99 0.003 248);
+  --secondary: oklch(0.26 0.015 264);
+  --secondary-foreground: oklch(0.96 0.004 250);
+  --muted: oklch(0.25 0.014 264);
+  --muted-foreground: oklch(0.68 0.02 258);
+  --accent: oklch(0.28 0.03 264);
+  --accent-foreground: oklch(0.96 0.004 250);
+  --destructive: oklch(0.62 0.20 25);
+  --destructive-foreground: oklch(0.99 0.003 248);
+  --border: oklch(0.30 0.014 260);
+  --input: oklch(0.30 0.014 260);
+  --ring: oklch(0.62 0.15 264);
+}
+
 
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+  /* Respect users who prefer reduced motion (WCAG 2.3.3): neutralize
+     transitions, animations and smooth scrolling without removing state. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
   html {
     -webkit-font-smoothing: antialiased;

@@ -25,6 +25,9 @@ import { Route as CrmIndexRouteImport } from './routes/crm/index'
 import { Route as LoansSlugRouteImport } from './routes/loans.$slug'
 import { Route as CrmLoansRouteImport } from './routes/crm/loans'
 import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
+import { Route as CrmOpportunitiesIndexRouteImport } from './routes/crm/opportunities/index'
+import { Route as CrmOpportunitiesNewRouteImport } from './routes/crm/opportunities/new'
+import { Route as CrmOpportunitiesIdRouteImport } from './routes/crm/opportunities/$id'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -106,6 +109,21 @@ const BlogsSlugRoute = BlogsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogsRoute,
 } as any)
+const CrmOpportunitiesIndexRoute = CrmOpportunitiesIndexRouteImport.update({
+  id: '/crm/opportunities/',
+  path: '/crm/opportunities/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmOpportunitiesNewRoute = CrmOpportunitiesNewRouteImport.update({
+  id: '/crm/opportunities/new',
+  path: '/crm/opportunities/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmOpportunitiesIdRoute = CrmOpportunitiesIdRouteImport.update({
+  id: '/crm/opportunities/$id',
+  path: '/crm/opportunities/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -124,6 +142,9 @@ export interface FileRoutesByFullPath {
   '/loans/$slug': typeof LoansSlugRoute
   '/crm/': typeof CrmIndexRoute
   '/loans/': typeof LoansIndexRoute
+  '/crm/opportunities/$id': typeof CrmOpportunitiesIdRoute
+  '/crm/opportunities/new': typeof CrmOpportunitiesNewRoute
+  '/crm/opportunities/': typeof CrmOpportunitiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -142,6 +163,9 @@ export interface FileRoutesByTo {
   '/loans/$slug': typeof LoansSlugRoute
   '/crm': typeof CrmIndexRoute
   '/loans': typeof LoansIndexRoute
+  '/crm/opportunities/$id': typeof CrmOpportunitiesIdRoute
+  '/crm/opportunities/new': typeof CrmOpportunitiesNewRoute
+  '/crm/opportunities': typeof CrmOpportunitiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,6 +185,9 @@ export interface FileRoutesById {
   '/loans/$slug': typeof LoansSlugRoute
   '/crm/': typeof CrmIndexRoute
   '/loans/': typeof LoansIndexRoute
+  '/crm/opportunities/$id': typeof CrmOpportunitiesIdRoute
+  '/crm/opportunities/new': typeof CrmOpportunitiesNewRoute
+  '/crm/opportunities/': typeof CrmOpportunitiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,6 +208,9 @@ export interface FileRouteTypes {
     | '/loans/$slug'
     | '/crm/'
     | '/loans/'
+    | '/crm/opportunities/$id'
+    | '/crm/opportunities/new'
+    | '/crm/opportunities/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -199,6 +229,9 @@ export interface FileRouteTypes {
     | '/loans/$slug'
     | '/crm'
     | '/loans'
+    | '/crm/opportunities/$id'
+    | '/crm/opportunities/new'
+    | '/crm/opportunities'
   id:
     | '__root__'
     | '/'
@@ -217,6 +250,9 @@ export interface FileRouteTypes {
     | '/loans/$slug'
     | '/crm/'
     | '/loans/'
+    | '/crm/opportunities/$id'
+    | '/crm/opportunities/new'
+    | '/crm/opportunities/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -235,6 +271,9 @@ export interface RootRouteChildren {
   LoansSlugRoute: typeof LoansSlugRoute
   CrmIndexRoute: typeof CrmIndexRoute
   LoansIndexRoute: typeof LoansIndexRoute
+  CrmOpportunitiesIdRoute: typeof CrmOpportunitiesIdRoute
+  CrmOpportunitiesNewRoute: typeof CrmOpportunitiesNewRoute
+  CrmOpportunitiesIndexRoute: typeof CrmOpportunitiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -351,6 +390,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogsSlugRouteImport
       parentRoute: typeof BlogsRoute
     }
+    '/crm/opportunities/': {
+      id: '/crm/opportunities/'
+      path: '/crm/opportunities'
+      fullPath: '/crm/opportunities/'
+      preLoaderRoute: typeof CrmOpportunitiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm/opportunities/new': {
+      id: '/crm/opportunities/new'
+      path: '/crm/opportunities/new'
+      fullPath: '/crm/opportunities/new'
+      preLoaderRoute: typeof CrmOpportunitiesNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm/opportunities/$id': {
+      id: '/crm/opportunities/$id'
+      path: '/crm/opportunities/$id'
+      fullPath: '/crm/opportunities/$id'
+      preLoaderRoute: typeof CrmOpportunitiesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -380,6 +440,9 @@ const rootRouteChildren: RootRouteChildren = {
   LoansSlugRoute: LoansSlugRoute,
   CrmIndexRoute: CrmIndexRoute,
   LoansIndexRoute: LoansIndexRoute,
+  CrmOpportunitiesIdRoute: CrmOpportunitiesIdRoute,
+  CrmOpportunitiesNewRoute: CrmOpportunitiesNewRoute,
+  CrmOpportunitiesIndexRoute: CrmOpportunitiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

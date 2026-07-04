@@ -1,38 +1,44 @@
-interface Props {
-  status: string;
-}
+import { cn } from "@/lib/utils";
 
-const statusColors: Record<string, string> = {
-  "Raw Lead": "bg-sky-500/20 text-sky-300",
+type Tone = "sky" | "orange" | "blue" | "violet" | "amber" | "emerald" | "green" | "cyan" | "slate" | "red";
 
-  "Documents Pending": "bg-orange-500/20 text-orange-300",
-
-  "Login Done": "bg-blue-500/20 text-blue-300",
-
-  "Credit WIP": "bg-purple-500/20 text-purple-300",
-
-  "Soft Approval": "bg-yellow-500/20 text-yellow-300",
-
-  Sanctioned: "bg-green-500/20 text-green-300",
-
-  Disbursed: "bg-emerald-500/20 text-emerald-300",
-
-  "Invoice Raised": "bg-cyan-500/20 text-cyan-300",
-
-  Hold: "bg-slate-500/20 text-slate-300",
-
-  Declined: "bg-red-500/20 text-red-300",
-
-  Completed: "bg-green-700/20 text-green-200",
+const toneClass: Record<Tone, string> = {
+  sky: "bg-sky-500/12 text-sky-600 dark:text-sky-300 ring-sky-500/20",
+  orange: "bg-orange-500/12 text-orange-600 dark:text-orange-300 ring-orange-500/20",
+  blue: "bg-blue-500/12 text-blue-600 dark:text-blue-300 ring-blue-500/20",
+  violet: "bg-violet-500/12 text-violet-600 dark:text-violet-300 ring-violet-500/20",
+  amber: "bg-amber-500/12 text-amber-600 dark:text-amber-300 ring-amber-500/20",
+  emerald: "bg-emerald-500/12 text-emerald-600 dark:text-emerald-300 ring-emerald-500/20",
+  green: "bg-green-500/12 text-green-600 dark:text-green-300 ring-green-500/20",
+  cyan: "bg-cyan-500/12 text-cyan-600 dark:text-cyan-300 ring-cyan-500/20",
+  slate: "bg-muted text-muted-foreground ring-border",
+  red: "bg-red-500/12 text-red-600 dark:text-red-300 ring-red-500/20",
 };
 
-export default function StatusBadge({ status }: Props) {
+const statusTone: Record<string, Tone> = {
+  "Raw Lead": "sky",
+  "Documents Pending": "orange",
+  "Login Done": "blue",
+  "Credit WIP": "violet",
+  "Soft Approval": "amber",
+  Sanctioned: "green",
+  Disbursed: "emerald",
+  "Invoice Raised": "cyan",
+  Hold: "slate",
+  Declined: "red",
+  Completed: "green",
+};
+
+export default function StatusBadge({ status }: { status: string }) {
+  const tone = statusTone[status] ?? "slate";
   return (
     <span
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-        statusColors[status] || "bg-slate-700 text-white"
-      }`}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset",
+        toneClass[tone],
+      )}
     >
+      <span className="size-1.5 rounded-full bg-current opacity-70" />
       {status}
     </span>
   );
